@@ -30,6 +30,13 @@ Cypress.Commands.add('getByDataCy', (selector) => {
   cy.get(`[data-cy^="${selector}"]`);
 });
 
+Cypress.Commands.add('getByPlaceholder', (placeholder) => {
+  cy.get(`[placeholder="${placeholder}"]`);
+});
+Cypress.Commands.add('getButton', (type) => {
+  cy.get(`[class~="btn"][type="${type}"]`);
+});
+
 Cypress.Commands.add('register', (email = 'riot@qa.team', username = 'riot', password = '12345Qwert!') => {
   cy.request('POST', '/api/users', {
     user: {
@@ -40,12 +47,11 @@ Cypress.Commands.add('register', (email = 'riot@qa.team', username = 'riot', pas
   });
 });
 
-Cypress.Commands.add('login', (email = 'riot@qa.team', username = 'riot', password = '12345Qwert!') => {
-  cy.request('POST', '/api/users', {
+Cypress.Commands.add('login', (email = 'riot@qa.team', password = '12345Qwert!') => {
+  cy.request('POST', '/api/users/login', {
     user: {
       email,
-      username,
-      password
+    password
     }
   }).then(response => {
     const user = {

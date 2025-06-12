@@ -27,15 +27,10 @@
 //
 
 Cypress.Commands.add('getByDataCy', (selector) => {
-  cy.get(`[data-cy^="${selector}"]`);
+ cy.get(selector);
 });
 
-Cypress.Commands.add('getByPlaceholder', (placeholder) => {
-  cy.get(`[placeholder="${placeholder}"]`);
-});
-Cypress.Commands.add('getButton', (type) => {
-  cy.get(`[class~="btn"][type="${type}"]`);
-});
+
 
 Cypress.Commands.add('register', (email = 'riot@qa.team', username = 'riot', password = '12345Qwert!') => {
   cy.request('POST', '/api/users', {
